@@ -6,7 +6,7 @@
                 <p class="text-4xl tracking-wider text-transparent bg-gradient-to-r from-purple-400 via bg-pink-500 to-red-500 font-extralight bg-clip-text">Movies<span class="font-bold">DB</span></p>
             </div>
             <div class="flex items-centerspace-x-4"> 
-                <p class="text-coolGray-200">Welcome {{ user }}</p>
+                <p class="text-coolGray-200">Welcome {{ user?.displayName }}</p>
                 <div v-if="isAuthenticated">
                     <button @click="signOut"
                      class="px-8 py-2 font-semibold bg-red-600 rounded-full focus:ring-green-900 focus:ring-4 focus:outline-none text-coolGray-100 hover:bg-green-800">Logout</button>
@@ -21,19 +21,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { authentication } from '~/helpers/useFirebase'
 
-const isAuthenticated = ref(false)
-const user = ref('')
-
-const signIn = () => {
-    isAuthenticated.value = true
-    user.value = 'Jesus'
-}
-
-
-const signOut = () => {
-    isAuthenticated.value = false
-    user.value = ''
-}
+const { signIn, signOut, isAuthenticated, user } = authentication()
 </script>
